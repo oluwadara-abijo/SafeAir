@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">SafeAir</string>
+    <string name="from">From</string>
+    <string name="to">To</string>
+    <string name="hi_where_will_you_like_to_go">Hi, where will you like to go?</string>
+    <string name="departure_date">Departure Date</string>
+    <string name="search_for_flights">Search for Flights</string>
 </resources>
