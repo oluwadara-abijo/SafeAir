@@ -42,12 +42,7 @@ public class TokenResponse implements Parcelable {
         }
     };
 
-    //Getters
-    public boolean isSuccess() {
-        return success;
-    }
-
-    public TokenResult getTokenResult() {
+    TokenResult getTokenResult() {
         return tokenResult;
     }
 }

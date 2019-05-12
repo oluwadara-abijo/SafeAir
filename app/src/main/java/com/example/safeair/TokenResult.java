@@ -47,7 +47,7 @@ public class TokenResult implements Parcelable {
     };
 
     //Getters
-    public String getAccessToken() {
+    String getAccessToken() {
         return access_token;
     }
 }
