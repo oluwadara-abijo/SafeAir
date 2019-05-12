@@ -1,8 +1,10 @@
-package com.example.safeair;
+package com.example.safeair.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.safeair.R;
 
 public class MainActivity extends AppCompatActivity {
 

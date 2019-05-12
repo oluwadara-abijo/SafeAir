@@ -1,4 +1,4 @@
-package com.example.safeair;
+package com.example.safeair.data.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -42,7 +42,7 @@ public class TokenResponse implements Parcelable {
         }
     };
 
-    TokenResult getTokenResult() {
+    public TokenResult getTokenResult() {
         return tokenResult;
     }
 }

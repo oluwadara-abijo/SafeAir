@@ -1,4 +1,4 @@
-package com.example.safeair;
+package com.example.safeair.data.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -47,7 +47,7 @@ public class TokenResult implements Parcelable {
     };
 
     //Getters
-    String getAccessToken() {
+    public String getAccessToken() {
         return access_token;
     }
 }

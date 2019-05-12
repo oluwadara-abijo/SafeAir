@@ -1,4 +1,4 @@
-package com.example.safeair;
+package com.example.safeair.data.network;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -8,12 +8,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
 /**
  * This is to generate a token from Lufthansa's API
  */
-class TokenClient {
+public class TokenClient {
 
     private static final String BASE_URL = "https://developer.lufthansa.com/io-docs/getoauth2accesstoken/";
     private static NetworkInterface client = null;
 
-    static NetworkInterface getClient() {
+    public static NetworkInterface getClient() {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();

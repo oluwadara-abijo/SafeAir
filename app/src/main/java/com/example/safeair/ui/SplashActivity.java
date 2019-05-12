@@ -1,4 +1,4 @@
-package com.example.safeair;
+package com.example.safeair.ui;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -8,6 +8,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+
+import com.example.safeair.BuildConfig;
+import com.example.safeair.R;
+import com.example.safeair.data.network.NetworkInterface;
+import com.example.safeair.data.network.TokenClient;
+import com.example.safeair.data.model.TokenResponse;
 
 import retrofit2.Call;
 import retrofit2.Callback;
