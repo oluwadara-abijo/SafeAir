@@ -44,6 +44,7 @@ public class SplashActivity extends AppCompatActivity {
                     sleep(5000);
                     if (!TextUtils.isEmpty(token)) {
                         Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                        intent.putExtra(MainActivity.EXTRA_TOKEN, token);
                         startActivity(intent);
                         finish();
                     }
