@@ -9,6 +9,8 @@ import androidx.lifecycle.MutableLiveData;
 import com.example.safeair.AppExecutors;
 import com.example.safeair.data.model.Airport;
 import com.example.safeair.data.model.AirportResponse;
+import com.example.safeair.data.model.ScheduleObject;
+import com.example.safeair.data.model.ScheduleResponse;
 
 import java.util.List;
 
@@ -47,8 +49,9 @@ public class NetworkDataSource {
 
     /**
      * Gets the list of airports from network
-     * @param lang 2-letter ISO 3166-1 language code
-     * @param limit Number of records returned per request
+     *
+     * @param lang     2-letter ISO 3166-1 language code
+     * @param limit    Number of records returned per request
      * @param operated Restrict the results to locations with flights operated by LH
      * @return the list of airports
      */
@@ -57,9 +60,9 @@ public class NetworkDataSource {
         final MutableLiveData<List<Airport>> mutableLiveData = new MutableLiveData<>();
 
         mExecutors.networkIO().execute(() -> {
-            NetworkInterface mBookingInterface = LufthansaClient.getClient();
+            NetworkInterface networkInterface = LufthansaClient.getClient();
 
-            mBookingInterface.getAirports(lang, limit, operated).enqueue(new Callback<AirportResponse>() {
+            networkInterface.getAirports(lang, limit, operated).enqueue(new Callback<AirportResponse>() {
                 @Override
                 public void onResponse(@NonNull Call<AirportResponse> call, @NonNull Response<AirportResponse> response) {
                     if (response.body() != null) {
@@ -71,6 +74,40 @@ public class NetworkDataSource {
                 @Override
                 public void onFailure(@NonNull Call<AirportResponse> call, @NonNull Throwable t) {
                     Log.d(LOG_TAG, "An error occurred while getting airports");
+
+                }
+            });
+        });
+        return mutableLiveData;
+    }
+
+    /**
+     * Gets the schedule of flights given an origin and a destination airport
+     *
+     * @param origin      3-letter IATA airport code of origin airport
+     * @param destination 3-letter IATA airport code of destination airport
+     * @param timeDate    Departure date in the local time of the departure airport
+     * @return the list of flight schedules
+     */
+    public LiveData<List<ScheduleObject>> getFlightSchedules(String origin, String destination, String timeDate) {
+
+        final MutableLiveData<List<ScheduleObject>> mutableLiveData = new MutableLiveData<>();
+
+        mExecutors.networkIO().execute(() -> {
+            NetworkInterface networkInterface = LufthansaClient.getClient();
+
+            networkInterface.getSchedules(origin, destination, timeDate).enqueue(new Callback<ScheduleResponse>() {
+                @Override
+                public void onResponse(@NonNull Call<ScheduleResponse> call, @NonNull Response<ScheduleResponse> response) {
+                    if (response.body() != null) {
+                        mutableLiveData.postValue(response.body().getSchedule().getSchedules());
+                    }
+                    Log.d(LOG_TAG, String.valueOf(response));
+                }
+
+                @Override
+                public void onFailure(@NonNull Call<ScheduleResponse> call, @NonNull Throwable t) {
+                    Log.d(LOG_TAG, "An error occurred while getting flight schedules");
 
                 }
             });

@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData;
 
 import com.example.safeair.InjectorUtils;
 import com.example.safeair.data.model.Airport;
+import com.example.safeair.data.model.ScheduleObject;
 import com.example.safeair.data.network.NetworkDataSource;
 
 import java.util.List;
@@ -38,5 +39,10 @@ public class Repository {
     public LiveData<List<Airport>> getAirports(String lang, String limit, boolean operated) {
         NetworkDataSource networkDataSource = InjectorUtils.provideNetworkDataSource();
         return networkDataSource.getAirports(lang, limit, operated);
+    }
+
+    public LiveData<List<ScheduleObject>> getFlightSchedules(String origin, String destination, String timeDate) {
+        NetworkDataSource networkDataSource = InjectorUtils.provideNetworkDataSource();
+        return networkDataSource.getFlightSchedules(origin, destination, timeDate);
     }
 }
