@@ -7,14 +7,14 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class Airports implements Parcelable {
+public class AirportObject implements Parcelable {
 
     //Field
     @SerializedName("Airport")
     private final List<Airport> airports;
 
     //Parcelable implementation
-    private Airports(Parcel in) {
+    private AirportObject(Parcel in) {
         airports = in.createTypedArrayList(Airport.CREATOR);
     }
 
@@ -28,15 +28,15 @@ public class Airports implements Parcelable {
         return 0;
     }
 
-    public static final Creator<Airports> CREATOR = new Creator<Airports>() {
+    public static final Creator<AirportObject> CREATOR = new Creator<AirportObject>() {
         @Override
-        public Airports createFromParcel(Parcel in) {
-            return new Airports(in);
+        public AirportObject createFromParcel(Parcel in) {
+            return new AirportObject(in);
         }
 
         @Override
-        public Airports[] newArray(int size) {
-            return new Airports[size];
+        public AirportObject[] newArray(int size) {
+            return new AirportObject[size];
         }
     };
 

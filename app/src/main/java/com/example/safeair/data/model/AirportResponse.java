@@ -9,11 +9,11 @@ public class AirportResponse implements Parcelable {
 
     //Field
     @SerializedName("AirportResource")
-    private final Airports airportResource;
+    private final AirportsObject airportResource;
 
     //Parcelable implementation
     private AirportResponse(Parcel in) {
-        airportResource = in.readParcelable(Airports.class.getClassLoader());
+        airportResource = in.readParcelable(AirportsObject.class.getClassLoader());
     }
 
     @Override
@@ -39,7 +39,7 @@ public class AirportResponse implements Parcelable {
     };
 
     //Getter
-    public Airports getAirportResource() {
+    public AirportsObject getAirportResource() {
         return airportResource;
     }
 }

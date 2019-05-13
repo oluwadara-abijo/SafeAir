@@ -1,27 +1,36 @@
 package com.example.safeair.ui;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 
+import com.example.safeair.InjectorUtils;
 import com.example.safeair.R;
-import com.example.safeair.data.model.AirportResponse;
-import com.example.safeair.data.network.LufthansaClient;
-import com.example.safeair.data.network.NetworkInterface;
+import com.example.safeair.data.model.Airport;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+
     public static final String EXTRA_TOKEN = "token";
-    private static final String LOG_TAG = MainActivity.class.getSimpleName();
 
     //Token from Splash Activity
     public static String TOKEN;
+
+    //ViewModel object
+    private MainViewModel mViewModel;
+
+    //List of airport objects
+    private List<Airport> mAirports;
+
+    private String[] airportCodes = new String[]{};
+    private List<String> airportCodesList = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,22 +43,28 @@ public class MainActivity extends AppCompatActivity {
             TOKEN = intent.getStringExtra(EXTRA_TOKEN);
         }
 
-        NetworkInterface networkInterface = LufthansaClient.getClient();
-        //Define query parameters
+        //Setup view model
+        MainViewModelFactory factory = InjectorUtils.provideMainViewModelFactory();
+        mViewModel = ViewModelProviders.of(this, factory).get(MainViewModel.class);
+
+        getAirports();
+    }
+
+    private void getAirports() {
         String lang = "EN";
         String limit = "100";
-
-        networkInterface.getAirports(lang, limit, true).enqueue(new Callback<AirportResponse>() {
-            @Override
-            public void onResponse(@NonNull Call<AirportResponse> call, @NonNull Response<AirportResponse> response) {
-                Log.d(LOG_TAG, response.message());
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<AirportResponse> call, @NonNull Throwable t) {
-                Log.d(LOG_TAG, t.getMessage());
+        mViewModel.getAirports(lang, limit, true).observe(this, airports -> {
+            mAirports = airports;
+            if (mAirports != null) {
+                for (Airport airport : mAirports) {
+                    airportCodesList.add(airport.getAirportCode());
+                }
+                airportCodes = airportCodesList.toArray(new String[0]);
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+                        android.R.layout.simple_dropdown_item_1line, airportCodes);
+                AutoCompleteTextView textView = findViewById(R.id.tv_origin);
+                textView.setAdapter(adapter);
             }
         });
-
     }
 }
