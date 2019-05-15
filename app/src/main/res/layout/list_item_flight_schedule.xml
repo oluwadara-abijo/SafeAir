@@ -49,7 +49,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_departure_time" />
 
     <TextView
-        android:id="@+id/tv_destinationAirport"
+        android:id="@+id/tv_arrivalAirport"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -67,7 +67,7 @@
         android:text="5:30"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_destinationAirport" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_arrivalAirport" />
 
     <TextView
         android:id="@+id/tv_arrivalDate"
@@ -87,7 +87,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:background="@android:color/darker_gray"
-        app:layout_constraintEnd_toStartOf="@id/tv_destinationAirport"
+        app:layout_constraintEnd_toStartOf="@id/tv_arrivalAirport"
         app:layout_constraintStart_toEndOf="@id/tv_originAirport"
         app:layout_constraintTop_toBottomOf="@id/tv_originAirport" />
 
