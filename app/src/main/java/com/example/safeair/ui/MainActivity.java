@@ -5,8 +5,8 @@ import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -98,6 +98,9 @@ public class MainActivity extends AppCompatActivity {
             if (mScheduleObjects != null) {
                 Log.d(LOG_TAG, mScheduleObjects.get(0).getFlights().get(0).getDepartureFlight().getAirportCode());
                 Log.d(LOG_TAG, mScheduleObjects.get(0).getFlights().get(0).getArrivalFlight().getAirportCode());
+                Intent intent = new Intent(MainActivity.this, ScheduleActivity.class);
+                intent.putParcelableArrayListExtra(ScheduleActivity.EXTRA_SCHEDULE, (ArrayList<? extends Parcelable>) mScheduleObjects);
+                startActivity(intent);
             }
         });
     }

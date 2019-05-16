@@ -45,19 +45,19 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
     @Override
     public void onBindViewHolder(@NonNull ScheduleAdapterViewHolder scheduleAdapterViewHolder, int i) {
         ScheduleObject scheduleObject = mFlights.get(i);
-        scheduleAdapterViewHolder.duration.setText(scheduleObject.getTotalJourney().getDuration());
-        scheduleAdapterViewHolder.originAirport.setText(scheduleObject.getFlights().get(i)
+        scheduleAdapterViewHolder.duration.setText(scheduleObject.getTotalJourney().getDuration().substring(2));
+        scheduleAdapterViewHolder.originAirport.setText(scheduleObject.getFlights().get(0)
                 .getDepartureFlight().getAirportCode());
-        scheduleAdapterViewHolder.departureTime.setText(scheduleObject.getFlights().get(i)
+        scheduleAdapterViewHolder.departureTime.setText(scheduleObject.getFlights().get(0)
                 .getDepartureFlight().getScheduledTimeLocal().getDateTime().substring(11));
-        scheduleAdapterViewHolder.departureDate.setText(scheduleObject.getFlights().get(i)
-                .getDepartureFlight().getScheduledTimeLocal().getDateTime().substring(0, 11));
-        scheduleAdapterViewHolder.arrivalAirport.setText(scheduleObject.getFlights().get(i)
+        scheduleAdapterViewHolder.departureDate.setText(scheduleObject.getFlights().get(0)
+                .getDepartureFlight().getScheduledTimeLocal().getDateTime().substring(0, 10));
+        scheduleAdapterViewHolder.arrivalAirport.setText(scheduleObject.getFlights().get(0)
                 .getArrivalFlight().getAirportCode());
-        scheduleAdapterViewHolder.arrivalTime.setText(scheduleObject.getFlights().get(i)
+        scheduleAdapterViewHolder.arrivalTime.setText(scheduleObject.getFlights().get(0)
                 .getArrivalFlight().getScheduledTimeLocal().getDateTime().substring(11));
-        scheduleAdapterViewHolder.arrivalDate.setText(scheduleObject.getFlights().get(i)
-                .getArrivalFlight().getScheduledTimeLocal().getDateTime().substring(0, 11));
+        scheduleAdapterViewHolder.arrivalDate.setText(scheduleObject.getFlights().get(0)
+                .getArrivalFlight().getScheduledTimeLocal().getDateTime().substring(0, 10));
     }
 
     @Override
