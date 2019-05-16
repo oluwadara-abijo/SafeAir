@@ -28,8 +28,6 @@ public class ScheduleActivity extends AppCompatActivity implements ScheduleAdapt
         Intent intent = getIntent();
         if (intent != null && intent.hasExtra(EXTRA_SCHEDULE)) {
             mScheduleObjects = intent.getParcelableArrayListExtra(EXTRA_SCHEDULE);
-            Log.d(LOG_TAG, mScheduleObjects.get(0).getFlights().get(0).getDepartureFlight().getAirportCode());
-            Log.d(LOG_TAG, mScheduleObjects.get(0).getFlights().get(0).getArrivalFlight().getAirportCode());
         }
 
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
@@ -51,6 +49,6 @@ public class ScheduleActivity extends AppCompatActivity implements ScheduleAdapt
 
     @Override
     public void onItemClickListener(ScheduleObject scheduleObject) {
-
+//        float longitude = scheduleObject.getFlights()
     }
 }

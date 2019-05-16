@@ -5,4 +5,6 @@
     <string name="hi_where_will_you_like_to_go">Hi, where will you like to go?</string>
     <string name="departure_date">Departure Date</string>
     <string name="search_for_flights">Search for Flights</string>
+    <string name="date_june">2019-06-15</string>
+    <string name="airplane_image">Airplane image</string>
 </resources>

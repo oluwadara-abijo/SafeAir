@@ -28,7 +28,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
     }
 
     //Class constructor that creates a ScheduleAdapter
-    public ScheduleAdapter(List<ScheduleObject> flightObjects, ItemClickListener itemClickListener) {
+    ScheduleAdapter(List<ScheduleObject> flightObjects, ItemClickListener itemClickListener) {
         mFlights = flightObjects;
         mItemClickListener = itemClickListener;
     }
