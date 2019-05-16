@@ -11,9 +11,9 @@ import android.util.Log;
 
 import com.example.safeair.BuildConfig;
 import com.example.safeair.R;
+import com.example.safeair.data.model.TokenResponse;
 import com.example.safeair.data.network.NetworkInterface;
 import com.example.safeair.data.network.TokenClient;
-import com.example.safeair.data.model.TokenResponse;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -23,7 +23,6 @@ public class SplashActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = SplashActivity.class.getSimpleName();
 
-    private TokenResponse tokenResponse;
     private String token;
 
     @Override
@@ -61,20 +60,18 @@ public class SplashActivity extends AppCompatActivity {
 
     private String getToken() {
         //Define query parameters
-        String apiId = "3166";
-        String auth_flow = "client_cred";
         String client_id = BuildConfig.ClientId;
         String client_secret = BuildConfig.ClientSecret;
+        String grant_type = "client_credentials";
+        String content_type = "application/x-www-form-urlencoded";
 
         NetworkInterface networkInterface = TokenClient.getClient();
 
-        networkInterface.postToken(apiId, auth_flow,
-                client_id, client_secret).enqueue(new Callback<TokenResponse>() {
+        networkInterface.postToken(content_type, client_id, client_secret, grant_type).enqueue(new Callback<TokenResponse>() {
             @Override
             public void onResponse(@NonNull Call<TokenResponse> call, @NonNull Response<TokenResponse> response) {
                 if (response.body() != null) {
-                    tokenResponse = response.body();
-                    token = tokenResponse.getTokenResult().getAccessToken();
+                    token = response.body().getAccessToken();
                 }
             }
 

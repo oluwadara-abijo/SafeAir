@@ -8,21 +8,25 @@ import com.google.gson.annotations.SerializedName;
 public class TokenResponse implements Parcelable {
 
     //Fields
-    @SerializedName("success")
-    private final boolean success;
-    @SerializedName("result")
-    private final TokenResult tokenResult;
+    @SerializedName("access_token")
+    private final String access_token;
+    @SerializedName("token_type")
+    private final String token_type;
+    @SerializedName("expires_in")
+    private final int expires_in;
 
     //Parcelable implementation
     private TokenResponse(Parcel in) {
-        success = in.readByte() != 0;
-        tokenResult = in.readParcelable(TokenResult.class.getClassLoader());
+        access_token = in.readString();
+        token_type = in.readString();
+        expires_in = in.readInt();
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeByte((byte) (success ? 1 : 0));
-        dest.writeParcelable(tokenResult, flags);
+        dest.writeString(access_token);
+        dest.writeString(token_type);
+        dest.writeInt(expires_in);
     }
 
     @Override
@@ -42,7 +46,8 @@ public class TokenResponse implements Parcelable {
         }
     };
 
-    public TokenResult getTokenResult() {
-        return tokenResult;
+    //Getters
+    public String getAccessToken() {
+        return access_token;
     }
 }

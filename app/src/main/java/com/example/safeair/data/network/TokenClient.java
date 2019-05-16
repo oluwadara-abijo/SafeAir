@@ -10,7 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class TokenClient {
 
-    private static final String BASE_URL = "https://developer.lufthansa.com/io-docs/getoauth2accesstoken/";
+    private static final String BASE_URL = "https://api.lufthansa.com/v1/";
     private static NetworkInterface client = null;
 
     public static NetworkInterface getClient() {
