@@ -100,6 +100,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(LOG_TAG, mScheduleObjects.get(0).getFlights().get(0).getArrivalFlight().getAirportCode());
                 Intent intent = new Intent(MainActivity.this, ScheduleActivity.class);
                 intent.putParcelableArrayListExtra(ScheduleActivity.EXTRA_SCHEDULE, (ArrayList<? extends Parcelable>) mScheduleObjects);
+
                 startActivity(intent);
             }
         });

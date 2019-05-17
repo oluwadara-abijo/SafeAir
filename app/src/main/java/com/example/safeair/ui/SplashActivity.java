@@ -34,27 +34,29 @@ public class SplashActivity extends AppCompatActivity {
             actionBar.hide();
         }
 
-        //Get token on a new thread
-        Thread t = new Thread() {
-            public void run() {
-                try {
-                    token = getToken();
-                    //sleep thread for 5 seconds, time in milliseconds
-                    sleep(5000);
-                    if (!TextUtils.isEmpty(token)) {
-                        Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-                        intent.putExtra(MainActivity.EXTRA_TOKEN, token);
-                        startActivity(intent);
-                        finish();
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        };
+        token = getToken();
 
-        //start thread
-        t.start();
+//        //Get token on a new thread
+//        Thread t = new Thread() {
+//            public void run() {
+//                try {
+//                    token = getToken();
+//                    //sleep thread for 5 seconds, time in milliseconds
+//                    sleep(10000);
+//                    if (!TextUtils.isEmpty(token)) {
+//                        Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+//                        intent.putExtra(MainActivity.EXTRA_TOKEN, token);
+//                        startActivity(intent);
+//                        finish();
+//                    }
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        };
+//
+//        //start thread
+//        t.start();
 
     }
 
@@ -72,6 +74,12 @@ public class SplashActivity extends AppCompatActivity {
             public void onResponse(@NonNull Call<TokenResponse> call, @NonNull Response<TokenResponse> response) {
                 if (response.body() != null) {
                     token = response.body().getAccessToken();
+                    if (token != null && !TextUtils.isEmpty(token)) {
+                        Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                        intent.putExtra(MainActivity.EXTRA_TOKEN, token);
+                        startActivity(intent);
+                        finish();
+                    }
                 }
             }
 

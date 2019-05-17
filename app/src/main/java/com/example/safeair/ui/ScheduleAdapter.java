@@ -1,6 +1,7 @@
 package com.example.safeair.ui;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.safeair.R;
+import com.example.safeair.data.model.FlightObject;
 import com.example.safeair.data.model.ScheduleObject;
 
 import java.util.List;
@@ -18,6 +20,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
 
     //List object that holds schedules
     private List<ScheduleObject> mFlights;
+    List<FlightObject> mFlightObject;
 
     //Create an instance of the click handling interface
     private final ItemClickListener mItemClickListener;
@@ -45,19 +48,24 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
     @Override
     public void onBindViewHolder(@NonNull ScheduleAdapterViewHolder scheduleAdapterViewHolder, int i) {
         ScheduleObject scheduleObject = mFlights.get(i);
+        mFlightObject = scheduleObject.getFlights();
+
+        for (FlightObject flight : mFlightObject) {
+            scheduleAdapterViewHolder.originAirport.setText(flight.getDepartureFlight().getAirportCode());
+            scheduleAdapterViewHolder.departureTime.setText(flight
+                    .getDepartureFlight().getScheduledTimeLocal().getDateTime().substring(11));
+            scheduleAdapterViewHolder.departureDate.setText(flight
+                    .getDepartureFlight().getScheduledTimeLocal().getDateTime().substring(0, 10));
+
+            scheduleAdapterViewHolder.arrivalAirport.setText(flight
+                    .getArrivalFlight().getAirportCode());
+            scheduleAdapterViewHolder.arrivalTime.setText(flight
+                    .getArrivalFlight().getScheduledTimeLocal().getDateTime().substring(11));
+            scheduleAdapterViewHolder.arrivalDate.setText(flight
+                    .getArrivalFlight().getScheduledTimeLocal().getDateTime().substring(0, 10));
+        }
+
         scheduleAdapterViewHolder.duration.setText(scheduleObject.getTotalJourney().getDuration().substring(2));
-        scheduleAdapterViewHolder.originAirport.setText(scheduleObject.getFlights().get(0)
-                .getDepartureFlight().getAirportCode());
-        scheduleAdapterViewHolder.departureTime.setText(scheduleObject.getFlights().get(0)
-                .getDepartureFlight().getScheduledTimeLocal().getDateTime().substring(11));
-        scheduleAdapterViewHolder.departureDate.setText(scheduleObject.getFlights().get(0)
-                .getDepartureFlight().getScheduledTimeLocal().getDateTime().substring(0, 10));
-        scheduleAdapterViewHolder.arrivalAirport.setText(scheduleObject.getFlights().get(0)
-                .getArrivalFlight().getAirportCode());
-        scheduleAdapterViewHolder.arrivalTime.setText(scheduleObject.getFlights().get(0)
-                .getArrivalFlight().getScheduledTimeLocal().getDateTime().substring(11));
-        scheduleAdapterViewHolder.arrivalDate.setText(scheduleObject.getFlights().get(0)
-                .getArrivalFlight().getScheduledTimeLocal().getDateTime().substring(0, 10));
     }
 
     @Override
