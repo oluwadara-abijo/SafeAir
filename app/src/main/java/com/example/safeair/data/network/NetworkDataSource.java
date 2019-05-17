@@ -101,6 +101,8 @@ public class NetworkDataSource {
                 public void onResponse(@NonNull Call<ScheduleResponse> call, @NonNull Response<ScheduleResponse> response) {
                     if (response.body() != null) {
                         mutableLiveData.postValue(response.body().getSchedule().getSchedules());
+                    } else {
+                        mutableLiveData.postValue(null);
                     }
                     Log.d(LOG_TAG, String.valueOf(response));
                 }

@@ -105,6 +105,8 @@ public class MainActivity extends AppCompatActivity {
 
         if (TextUtils.isEmpty(origin) || TextUtils.isEmpty(destination)) {
             Snackbar.make(searchButton, "You must select both origin and destination", Snackbar.LENGTH_SHORT).show();
+        } else if (origin.equals(destination)) {
+            Snackbar.make(searchButton, "Choose a different origin or destination", Snackbar.LENGTH_SHORT).show();
         } else if (isNetworkAvailable()) {
             progressBar.setVisibility(View.VISIBLE);
             searchButton.setVisibility(View.GONE);
