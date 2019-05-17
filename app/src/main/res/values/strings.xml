@@ -7,4 +7,6 @@
     <string name="search_for_flights">Search for Flights</string>
     <string name="date_june">2019-06-15</string>
     <string name="airplane_image">Airplane image</string>
+    <string name="no_internet">No internet…\n\nPlease check your internet connection.</string>
+    <string name="retry">Retry</string>
 </resources>
